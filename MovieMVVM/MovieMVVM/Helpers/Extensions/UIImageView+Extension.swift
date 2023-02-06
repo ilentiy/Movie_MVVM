@@ -6,8 +6,8 @@ import UIKit
 
 /// Расширение для получения фото друга
 extension UIImageView {
-    func load(url: String) {
-        guard let url = URL(string: url) else { return }
+    func load(url: URL) {
+        //   guard let url = url else { return }
         DispatchQueue.global().async {
             guard let data = try? Data(contentsOf: url),
                   let image = UIImage(data: data)
