@@ -59,7 +59,22 @@ final class MoviesListTableViewController: UITableViewController {
     var onFinishFlow: IntHandler?
     var movieListViewStates: MovieListViewStates = .initial {
         didSet {
-            view.setNeedsLayout()
+            switch movieListViewStates {
+            case .initial:
+                setupUI()
+                fetchMoviesList()
+            case .loading:
+                activityIndicatorView.startAnimating()
+                activityIndicatorView.isHidden = false
+            case .success:
+                activityIndicatorView.stopAnimating()
+                activityIndicatorView.isHidden = true
+                tableView.reloadData()
+            case let .failure(error):
+                activityIndicatorView.stopAnimating()
+                activityIndicatorView.isHidden = true
+                showAlert(error: error)
+            }
         }
     }
 
@@ -81,15 +96,15 @@ final class MoviesListTableViewController: UITableViewController {
 
     // MARK: - Life Cycle
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        changeState()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupListMoviesStates()
+        movieListViewStates = .initial
     }
 
     // MARK: - Private Methods
 
     private func setupUI() {
-        movieListViewStates = .loading
         navigationController?.navigationBar.isTranslucent = false
         title = Title.Screen.movieList
         view.addSubview(stackView)
@@ -113,7 +128,6 @@ final class MoviesListTableViewController: UITableViewController {
         switch movieListViewStates {
         case .initial:
             setupUI()
-            fetchMoviesList()
         case .loading:
             activityIndicatorView.startAnimating()
             activityIndicatorView.isHidden = false
@@ -125,6 +139,12 @@ final class MoviesListTableViewController: UITableViewController {
             activityIndicatorView.stopAnimating()
             activityIndicatorView.isHidden = true
             showAlert(error: error)
+        }
+    }
+
+    private func setupListMoviesStates() {
+        movieListViewModel?.movieListViewStates = { [weak self] state in
+            self?.movieListViewStates = state
         }
     }
 
@@ -160,12 +180,6 @@ final class MoviesListTableViewController: UITableViewController {
     private func giveMovieID(index: Int) {
         guard let movieID = movieListViewModel?.movies?[index].id else { return }
         onFinishFlow?(movieID)
-    }
-
-    private func setupListMoviesStates() {
-        movieListViewModel?.movieListViewStates = { [weak self] state in
-            self?.movieListViewStates = state
-        }
     }
 
     @objc private func refreshAction() {
