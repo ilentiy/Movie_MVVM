@@ -59,22 +59,7 @@ final class MoviesListTableViewController: UITableViewController {
     var onFinishFlow: IntHandler?
     var movieListViewStates: MovieListViewStates = .initial {
         didSet {
-            switch movieListViewStates {
-            case .initial:
-                setupUI()
-                fetchMoviesList()
-            case .loading:
-                activityIndicatorView.startAnimating()
-                activityIndicatorView.isHidden = false
-            case .success:
-                activityIndicatorView.stopAnimating()
-                activityIndicatorView.isHidden = true
-                tableView.reloadData()
-            case let .failure(error):
-                activityIndicatorView.stopAnimating()
-                activityIndicatorView.isHidden = true
-                showAlert(error: error)
-            }
+            changeState()
         }
     }
 
@@ -128,6 +113,7 @@ final class MoviesListTableViewController: UITableViewController {
         switch movieListViewStates {
         case .initial:
             setupUI()
+            fetchMoviesList()
         case .loading:
             activityIndicatorView.startAnimating()
             activityIndicatorView.isHidden = false
