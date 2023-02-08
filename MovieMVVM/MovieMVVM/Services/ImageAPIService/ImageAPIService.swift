@@ -11,6 +11,8 @@ final class ImageAPIService: ImageAPIServiceProtocol {
         static let imagePathUrl = "https://image.tmdb.org/t/p/w500"
     }
 
+    // MARK: - Public Properties
+
     let sessionConfiguration = URLSessionConfiguration.default
     let decoder = JSONDecoder()
 

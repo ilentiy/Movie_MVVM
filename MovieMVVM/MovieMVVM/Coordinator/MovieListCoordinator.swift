@@ -9,10 +9,12 @@ final class MovieListCoordinator: BaseCoordinator {
 
     private var rootController: UINavigationController?
 
-    // MARK: - Public Propeties
+    // MARK: - Private Propeties
 
-    var onFinishFlow: VoidHandler?
-    var assemblyModuleBuilder: AssemblyBuilderProtocol?
+    private var onFinishFlow: VoidHandler?
+    private var assemblyModuleBuilder: AssemblyBuilderProtocol?
+
+    // MARK: -   Init
 
     init(assemblyModuleBuilder: AssemblyBuilderProtocol) {
         self.assemblyModuleBuilder = assemblyModuleBuilder

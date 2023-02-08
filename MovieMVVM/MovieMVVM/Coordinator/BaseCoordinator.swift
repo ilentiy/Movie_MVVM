@@ -3,7 +3,7 @@
 
 import UIKit
 
-///  Бфзовый координатор
+///  Базовый координатор
 class BaseCoordinator {
     // MARK: - Private Properties
 

@@ -96,8 +96,8 @@ final class MainInfoTableViewCell: UITableViewCell {
         }
         runtimeLabel.text = String(
             format: Constants.runtimeFormat,
-            movieDetails.runtime / 60,
-            movieDetails.runtime % 60
+            movieDetails.runtime / Constants.divider,
+            movieDetails.runtime % Constants.divider
         )
 
         titleLabel.attributedText = NSMutableAttributedString().bold("\(movieDetails.title)")

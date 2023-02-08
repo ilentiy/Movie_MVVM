@@ -5,7 +5,6 @@ import Foundation
 
 /// Сетевой слой
 final class NetworkService: NetworkServiceProtocol {
-
     // MARK: - Public Methods
 
     func fetchMovieDetails(id: Int, completion: @escaping (Result<MovieDetails, Error>) -> Void) {
@@ -26,7 +25,8 @@ final class NetworkService: NetworkServiceProtocol {
                     completion(.failure(error))
                 }
             }
-        }.resume()
+        }
+        .resume()
     }
 
     func fetchMovies(category: Category, completion: @escaping (Result<[Movie], Error>) -> Void) {
@@ -44,8 +44,9 @@ final class NetworkService: NetworkServiceProtocol {
                     completion(.success(movies))
                 }
             } catch {
-                print(error.localizedDescription)
+                completion(.failure(error))
             }
-        }.resume()
+        }
+        .resume()
     }
 }

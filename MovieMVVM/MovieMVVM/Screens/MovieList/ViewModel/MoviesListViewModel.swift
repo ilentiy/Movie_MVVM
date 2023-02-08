@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Вью модель списка фильмов
+/// Вью модель экрана списка фильмов
 final class MoviesListViewModel: MovieListViewModelProtocol {
     // MARK: - Public Properties
 

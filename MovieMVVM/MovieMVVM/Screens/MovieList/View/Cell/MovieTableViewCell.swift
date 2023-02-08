@@ -8,7 +8,7 @@ final class MovieTableViewCell: UITableViewCell {
     // MARK: - Private Visual Component
 
     private let posterImageView: UIImageView = {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 200))
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
@@ -26,7 +26,7 @@ final class MovieTableViewCell: UITableViewCell {
     private let overviewLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 15
         label.lineBreakMode = .byWordWrapping
         label.font = .systemFont(ofSize: 13)
         return label
@@ -113,7 +113,6 @@ final class MovieTableViewCell: UITableViewCell {
             posterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
             posterImageView.heightAnchor.constraint(equalToConstant: 200),
             posterImageView.widthAnchor.constraint(equalToConstant: 150),
-
         ])
     }
 

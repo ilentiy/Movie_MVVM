@@ -42,11 +42,7 @@ final class FileManagerService: FileManagerServiceProtocol {
         else { return nil }
         let url = docsDirectory.appendingPathComponent(Constants.folderName, isDirectory: true)
         if !FileManager.default.fileExists(atPath: url.path) {
-            do {
-                try FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
-            } catch {
-                print(error)
-            }
+            try? FileManager.default.createDirectory(at: url, withIntermediateDirectories: true)
         }
         return url
     }

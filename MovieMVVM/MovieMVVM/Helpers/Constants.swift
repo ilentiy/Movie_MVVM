@@ -16,7 +16,7 @@ enum Identifiers {
     static let mainInfo = "MainInfo"
     static let credits = "Credits"
     static let credit = "Credits"
-    static let cell = "Cell"
+    static let cell = "Movie"
 }
 
 /// Тайтлы
@@ -59,8 +59,10 @@ enum Constants {
     static let description = "Описание\n"
     static let newLine = "\n"
     static let voteFormat = "%.1f"
+    static let divider = 60
 }
 
 /// Псевдоним Типа
 typealias VoidHandler = () -> ()
 typealias ErrorHandler = (Error) -> ()
+typealias IntHandler = (Int) -> ()

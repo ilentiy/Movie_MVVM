@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Презентер экрана "Подробнее о фильме"
+/// Вью модель экрана "Подробнее о фильме"
 final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
     // MARK: - Public properties
 
@@ -37,6 +37,7 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
             switch result {
             case let .success(data):
                 completion(.success(data))
+                self.updateView?()
             case let .failure(error):
                 completion(.failure(error))
             }

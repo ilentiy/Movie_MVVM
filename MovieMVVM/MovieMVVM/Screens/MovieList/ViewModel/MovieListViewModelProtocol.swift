@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Протокол вьюмодели  списка фильмов
+/// Протокол вьюмодели  экрана  списка фильмов
 protocol MovieListViewModelProtocol {
     // MARK: - Public Properties
 

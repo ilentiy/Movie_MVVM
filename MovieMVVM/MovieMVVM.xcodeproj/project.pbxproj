@@ -12,6 +12,7 @@
 		09065CC629927A8B000607CB /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09065CC429927A8B000607CB /* MovieDetailsViewModel.swift */; };
 		09065CC729927A8B000607CB /* MovieDetailsViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09065CC529927A8B000607CB /* MovieDetailsViewModelProtocol.swift */; };
 		09174A00299353D1003A4DFD /* MoviesCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 091749FF299353D1003A4DFD /* MoviesCategory.swift */; };
+		09174A022993B0D3003A4DFD /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09174A012993B0D3003A4DFD /* UIViewController+Extension.swift */; };
 		093D404429096AF600DF9967 /* NSMutableAttributedString+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 093D404329096AF600DF9967 /* NSMutableAttributedString+Extension.swift */; };
 		095FA69829088DEB00BCCD20 /* MovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095FA69729088DEB00BCCD20 /* MovieTableViewCell.swift */; };
 		096817AA299174130047AF01 /* Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09681796299174100047AF01 /* Proxy.swift */; };
@@ -52,6 +53,7 @@
 		09065CC429927A8B000607CB /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		09065CC529927A8B000607CB /* MovieDetailsViewModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModelProtocol.swift; sourceTree = "<group>"; };
 		091749FF299353D1003A4DFD /* MoviesCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesCategory.swift; sourceTree = "<group>"; };
+		09174A012993B0D3003A4DFD /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		093D404329096AF600DF9967 /* NSMutableAttributedString+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSMutableAttributedString+Extension.swift"; sourceTree = "<group>"; };
 		095FA69729088DEB00BCCD20 /* MovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTableViewCell.swift; sourceTree = "<group>"; };
 		09681796299174100047AF01 /* Proxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proxy.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 		0938D38329910173008A97D2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				09EA526B290C5E9600328F66 /* Constants.swift */,
 				09790F812992DD19002433D6 /* AlertDelegateProtocol.swift */,
 				091749FF299353D1003A4DFD /* MoviesCategory.swift */,
 				09790F832992E7B8002433D6 /* MovieListViewStates.swift */,
@@ -290,6 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				093D404329096AF600DF9967 /* NSMutableAttributedString+Extension.swift */,
+				09174A012993B0D3003A4DFD /* UIViewController+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -315,7 +319,6 @@
 			children = (
 				09FF40652906EDFD001D73A7 /* Info.plist */,
 				09FF40572906EDFB001D73A7 /* AppDelegate.swift */,
-				09EA526B290C5E9600328F66 /* Constants.swift */,
 				09FF40592906EDFB001D73A7 /* SceneDelegate.swift */,
 				09FF40602906EDFD001D73A7 /* Assets.xcassets */,
 				09065CBB29927119000607CB /* Builder */,
@@ -459,6 +462,7 @@
 				096817AB299174130047AF01 /* ProxyProtocol.swift in Sources */,
 				09FF40702906F33D001D73A7 /* MoviesListTableViewController.swift in Sources */,
 				09065CBE2992711A000607CB /* AssemblyBuilderProtocol.swift in Sources */,
+				09174A022993B0D3003A4DFD /* UIViewController+Extension.swift in Sources */,
 				09065CC729927A8B000607CB /* MovieDetailsViewModelProtocol.swift in Sources */,
 				095FA69829088DEB00BCCD20 /* MovieTableViewCell.swift in Sources */,
 				096817BD299195F80047AF01 /* BaseCoordinator.swift in Sources */,

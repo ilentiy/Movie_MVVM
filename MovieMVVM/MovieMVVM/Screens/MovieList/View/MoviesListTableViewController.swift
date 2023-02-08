@@ -57,7 +57,7 @@ final class MoviesListTableViewController: UITableViewController {
     // MARK: - Public Properties
 
     var movieListViewModel: MovieListViewModelProtocol?
-    var onFinishFlow: ((Int) -> Void)?
+    var onFinishFlow: IntHandler?
     var movieListViewStates: MovieListViewStates = .initial {
         didSet {
             tableView.setNeedsLayout()
@@ -92,7 +92,6 @@ final class MoviesListTableViewController: UITableViewController {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-
         case let .failure(error):
             activityIndicatorView.stopAnimating()
             activityIndicatorView.isHidden = true
@@ -195,6 +194,7 @@ final class MoviesListTableViewController: UITableViewController {
     }
 }
 
+/// AlertDelegateProtocol
 extension MoviesListTableViewController: AlertDelegateProtocol {
     func showAlert(error: Error) {
         showAlert(

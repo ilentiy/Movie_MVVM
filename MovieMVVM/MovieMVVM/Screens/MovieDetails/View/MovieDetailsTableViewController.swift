@@ -5,7 +5,7 @@ import UIKit
 
 /// Экран Фильма
 final class MovieDetailsTableViewController: UITableViewController {
-    // MARK: - Constants
+    // MARK: - Private Enum
 
     private enum TableCellTypes {
         case header
@@ -114,6 +114,7 @@ final class MovieDetailsTableViewController: UITableViewController {
     }
 }
 
+/// AlertDelegateProtocol
 extension MovieDetailsTableViewController: AlertDelegateProtocol {
     func showAlert(error: Error) {
         showAlert(
