@@ -63,10 +63,8 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case let .success(movies):
-                DispatchQueue.main.async {
-                    self.movies = movies
-                    self.movieListViewStates?(.success)
-                }
+                self.movies = movies
+                self.movieListViewStates?(.success)
             case let .failure(error):
                 self.movieListViewStates?(.failure(error))
             }

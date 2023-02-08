@@ -59,7 +59,9 @@ final class MoviesListTableViewController: UITableViewController {
     var onFinishFlow: IntHandler?
     var movieListViewStates: MovieListViewStates = .initial {
         didSet {
-            changeState()
+            DispatchQueue.main.async {
+                self.changeState()
+            }
         }
     }
 
@@ -170,9 +172,7 @@ final class MoviesListTableViewController: UITableViewController {
 
     @objc private func refreshAction() {
         tableView.refreshControl?.beginRefreshing()
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        movieListViewStates = .success
         tableView.refreshControl?.endRefreshing()
     }
 
