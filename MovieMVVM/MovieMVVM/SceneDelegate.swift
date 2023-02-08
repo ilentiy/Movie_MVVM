@@ -1,5 +1,5 @@
 // SceneDelegate.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import UIKit
 

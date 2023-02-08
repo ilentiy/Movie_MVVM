@@ -1,5 +1,5 @@
 // MoviesListTableViewController.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import UIKit
 
@@ -114,6 +114,7 @@ final class MoviesListTableViewController: UITableViewController {
     private func changeState() {
         switch movieListViewStates {
         case .initial:
+            keychainAlertView()
             setupUI()
             fetchMoviesList()
         case .loading:
@@ -168,6 +169,22 @@ final class MoviesListTableViewController: UITableViewController {
     private func giveMovieID(index: Int) {
         guard let movieID = movieListViewModel?.movies?[index].id else { return }
         onFinishFlow?(movieID)
+    }
+
+    private func keyChainAlert() {
+        showAPIKeyAlert(
+            title: AlertConstants.errorTitle,
+            message: AlertConstants.errorMessageText
+        ) { [weak self] token in
+            guard let self = self else { return }
+            self.movieListViewModel?.keychainInfo()?.setValue(token, forKey: Constants.keyText)
+        }
+        // tableView.reloadData()
+    }
+
+    private func keychainAlertView() {
+        guard (movieListViewModel?.keychainInfo()?.getValue(Constants.keyText).isEmpty) == nil else { return }
+        keyChainAlert()
     }
 
     @objc private func refreshAction() {

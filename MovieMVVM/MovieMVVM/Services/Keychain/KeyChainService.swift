@@ -1,5 +1,5 @@
 // KeyChainService.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import KeychainSwift
 
@@ -11,12 +11,12 @@ final class KeyChainService: KeyChainServiceProtocol {
 
     // MARK: - Public methods
 
-    func getAPIKey(_ key: String) -> String {
+    func getValue(_ key: String) -> String {
         guard let keyValue = keychain.get(key) else { return String() }
         return keyValue
     }
 
-    func saveAPIKey(_ value: String, forKey: String) {
+    func setValue(_ value: String, forKey: String) {
         keychain.set(value, forKey: forKey)
     }
 }

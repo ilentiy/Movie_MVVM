@@ -1,5 +1,5 @@
 // AssemblyModuleBuilder.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import UIKit
 
@@ -8,15 +8,21 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
     // MARK: - Public Methods
 
     func makeMoviesTableView() -> UIViewController {
-        let networkService = NetworkService()
+        let keychainService = KeyChainService()
+        let networkService = NetworkService(keychainService: keychainService)
         let imageService = ImageService()
-        let movieListViewModel = MoviesListViewModel(networkService: networkService, imageService: imageService)
+        let movieListViewModel = MoviesListViewModel(
+            networkService: networkService,
+            imageService: imageService,
+            keychainService: keychainService
+        )
         let movieListViewController = MoviesListTableViewController(viewModel: movieListViewModel)
         return movieListViewController
     }
 
     func makeMovieDetailsTableView(movieId: Int?) -> UIViewController {
-        let networkService = NetworkService()
+        let keychainService = KeyChainService()
+        let networkService = NetworkService(keychainService: keychainService)
         let imageService = ImageService()
         let movieDetailViewModel = MovieDetailsViewModel(
             networkService: networkService,

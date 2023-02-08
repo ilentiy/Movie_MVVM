@@ -1,5 +1,5 @@
 // UIViewController+Extension.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import UIKit
 
@@ -23,6 +23,21 @@ extension UIViewController {
             style: .default,
             handler: handler
         )
+        alertController.addAction(alertControllerAction)
+        present(alertController, animated: true)
+    }
+
+    func showAPIKeyAlert(
+        title: String?,
+        message: String,
+        handler: Closure
+    ) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertControllerAction = UIAlertAction(title: AlertConstants.actionTitle, style: .default) { _ in
+            let result = alertController.textFields?.first?.text ?? ""
+            handler?(result)
+        }
+        alertController.addTextField()
         alertController.addAction(alertControllerAction)
         present(alertController, animated: true)
     }

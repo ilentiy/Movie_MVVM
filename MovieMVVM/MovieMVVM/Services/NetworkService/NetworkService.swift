@@ -1,15 +1,25 @@
 // NetworkService.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import Foundation
 
 /// Сетевой слой
 final class NetworkService: NetworkServiceProtocol {
+    // MARK: - Public Properties
+
+    var keychainService: KeyChainServiceProtocol?
+
+    // MARK: - Init
+
+    init(keychainService: KeyChainServiceProtocol) {
+        self.keychainService = keychainService
+    }
+
     // MARK: - Public Methods
 
     func fetchMovieDetails(id: Int, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
         guard
-            let url = URL(string: "\(BaseURL.movies)\(id)\(BaseURL.apiKey)")
+            let url = URL(string: "\(BaseURL.movies)\(id)\(keychainService?.getValue(Constants.keyText) ?? "")")
         else { return }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
@@ -29,7 +39,10 @@ final class NetworkService: NetworkServiceProtocol {
 
     func fetchMovies(category: Category, completion: @escaping (Result<[Movie], Error>) -> Void) {
         guard
-            let url = URL(string: "\(BaseURL.movies)\(category.categoryString)\(BaseURL.apiKey)")
+            let url =
+            URL(
+                string: "\(BaseURL.movies)\(category.category)\(keychainService?.getValue(Constants.keyText) ?? "")"
+            )
         else { return }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {

@@ -1,5 +1,5 @@
 // MovieListViewModelProtocol.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import Foundation
 
@@ -8,7 +8,8 @@ protocol MovieListViewModelProtocol {
     var movies: [Movie]? { get set }
     var movieListViewStates: ((MovieListViewStates) -> ())? { get set }
 
-    func fetchMoviesType(index: Int)
     func fetchMovieList()
+    func fetchMoviesType(index: Int)
+    func keychainInfo() -> KeyChainServiceProtocol?
     func loadImageData(url: String, completion: @escaping (Result<Data, Error>) -> Void)
 }

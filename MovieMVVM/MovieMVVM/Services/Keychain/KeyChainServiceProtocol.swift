@@ -1,10 +1,10 @@
 // KeyChainServiceProtocol.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import Foundation
 
 /// Протокол сервиса хранения критических данных пользователя
 protocol KeyChainServiceProtocol {
-    func getAPIKey(_ key: String) -> String
-    func saveAPIKey(_ value: String, forKey: String)
+    func getValue(_ key: String) -> String
+    func setValue(_ value: String, forKey: String)
 }

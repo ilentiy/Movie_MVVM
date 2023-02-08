@@ -1,5 +1,5 @@
 // Constants.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilenty. All rights reserved.
 
 import Foundation
 
@@ -42,7 +42,7 @@ enum AlertConstants {
 
 /// Констатнты
 enum Constants {
-    static let keyText = "isLogin"
+    static let keyText = "token"
     static let login = "admin"
     static let password = "admin"
     static let passwordText = "Пароль"
