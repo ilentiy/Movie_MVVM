@@ -49,14 +49,12 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
         guard let id = movieId else { return }
         networkService?.fetchMovieDetails(id: id) { [weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                switch result {
-                case let .success(movieDetails):
-                    self.movieDetails = movieDetails
-                    self.updateView?()
-                case let .failure(error):
-                    self.showErrorAlert?(error)
-                }
+            switch result {
+            case let .success(movieDetails):
+                self.movieDetails = movieDetails
+                self.updateView?()
+            case let .failure(error):
+                self.showErrorAlert?(error)
             }
         }
     }

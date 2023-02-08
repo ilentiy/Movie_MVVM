@@ -48,23 +48,23 @@ final class MoviesListTableViewController: UITableViewController {
         return view
     }()
 
-//    private let activityIndicatorView: UIActivityIndicatorView = {
-//        let activityViewController = UIActivityIndicatorView()
-//        activityViewController.translatesAutoresizingMaskIntoConstraints = false
-//        return activityViewController
-//    }()
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let activityViewController = UIActivityIndicatorView()
+        activityViewController.translatesAutoresizingMaskIntoConstraints = false
+        return activityViewController
+    }()
 
-    // MARK: - Private Property
+    // MARK: - Public Properties
 
     var movieListViewModel: MovieListViewModelProtocol?
     var onFinishFlow: ((Int) -> Void)?
     var movieListViewStates: MovieListViewStates = .initial {
         didSet {
-            DispatchQueue.main.async {
-                self.view.setNeedsLayout()
-            }
+            tableView.setNeedsLayout()
         }
     }
+
+    // MARK: - Init
 
     init(viewModel: MovieListViewModelProtocol) {
         movieListViewModel = viewModel
@@ -73,7 +73,7 @@ final class MoviesListTableViewController: UITableViewController {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constants.fatalError)
     }
 
     // MARK: - Life Cycle
@@ -83,14 +83,19 @@ final class MoviesListTableViewController: UITableViewController {
         switch movieListViewStates {
         case .initial:
             setupUI()
-//            activityIndicatorView.startAnimating()
-//            tableView.isHidden = true
+        case .loading:
+            activityIndicatorView.startAnimating()
+            activityIndicatorView.isHidden = false
         case .success:
-//            tableView.isHidden = false
-//            activityIndicatorView.isHidden = true
-//            activityIndicatorView.stopAnimating()
-            tableView.reloadData()
+            activityIndicatorView.stopAnimating()
+            activityIndicatorView.isHidden = true
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+
         case let .failure(error):
+            activityIndicatorView.stopAnimating()
+            activityIndicatorView.isHidden = true
             showAlert(error: error)
         }
     }
@@ -98,75 +103,60 @@ final class MoviesListTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func setupUI() {
-        //  showErrorAlert()
         setupListMoviesStates()
-        obtainMovieList()
         navigationController?.navigationBar.isTranslucent = false
         title = Title.Screen.movieList
-        // view.addSubview(activityIndicatorView)
         view.addSubview(stackView)
+        setConstraintsStackView()
+        view.addSubview(activityIndicatorView)
+        setConstraintsTableView()
+        setConstraintsActivityView()
         refreshControl = UIRefreshControl()
         stackView.addArrangedSubview(popularButton)
         stackView.addArrangedSubview(topButton)
         stackView.addArrangedSubview(upcommingButton)
         tableView.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
-        view.backgroundColor = .systemBackground
         tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
         tableView.register(
             MovieTableViewCell.self,
             forCellReuseIdentifier: Identifiers.cell
         )
-        //   setConstraintsActivityView()
-        setupConstraints()
+        fetchMoviesList()
     }
 
-    private func obtainMovieList() {
-        movieListViewModel?.fetchMoviesType(index: 0)
+    private func fetchMoviesList() {
+        movieListViewModel?.fetchMovieList()
     }
 
-    private func configureUI() {
-        view.backgroundColor = .systemBackground
-        tableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
-        tableView.register(
-            MovieTableViewCell.self,
-            forCellReuseIdentifier: Identifiers.cell
-        )
-    }
-
-    private func setupConstraints() {
+    private func setConstraintsActivityView() {
         NSLayoutConstraint.activate([
-            stackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            stackView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2),
+            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
-//        NSLayoutConstraint.activate([
-//            activityIndicatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            activityIndicatorView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-//        ])
+    }
+
+    private func setConstraintsStackView() {
+        NSLayoutConstraint.activate([
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0),
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.heightAnchor.constraint(equalToConstant: 30)
+        ])
+    }
+
+    private func setConstraintsTableView() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 10),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
     }
 
     private func giveMovieID(index: Int) {
         guard let movieID = movieListViewModel?.movies?[index].id else { return }
         onFinishFlow?(movieID)
     }
-
-    //    private func updateView() {
-    //        movieListViewModel?.updateView = {
-    //            DispatchQueue.main.async {
-    //                self.tableView.reloadData()
-    //            }
-    //        }
-    //    }
-
-    //    private func showErrorAlert() {
-    //        movieListViewModel?.showErrorAlert = { [weak self] error in
-    //            guard let self = self else { return }
-    //            DispatchQueue.main.async {
-    //                self.showAlert(error: error)
-    //            }
-    //        }
-    //    }
 
     private func setupListMoviesStates() {
         movieListViewModel?.movieListViewStates = { [weak self] state in
@@ -179,7 +169,6 @@ final class MoviesListTableViewController: UITableViewController {
         DispatchQueue.main.async {
             self.tableView.reloadData()
         }
-        //   movieListViewModel?.updateView?()
         tableView.refreshControl?.endRefreshing()
     }
 
@@ -193,20 +182,11 @@ final class MoviesListTableViewController: UITableViewController {
         movieListViewModel?.movies?.count ?? 0
     }
 
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-          cell.layoutIfNeeded()
-      }
-
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let viewModel = movieListViewModel else { return UITableViewCell() }
         let cell = MovieTableViewCell(style: .default, reuseIdentifier: Identifiers.cell)
         cell.configure(index: indexPath.row, movieListViewModel: viewModel)
         cell.alertDelegate = self
-        cell.layoutIfNeeded()
         return cell
     }
 

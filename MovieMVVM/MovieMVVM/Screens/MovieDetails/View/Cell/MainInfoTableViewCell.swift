@@ -81,7 +81,7 @@ final class MainInfoTableViewCell: UITableViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constants.fatalError)
     }
 
     // MARK: - Public Methods
@@ -89,25 +89,31 @@ final class MainInfoTableViewCell: UITableViewCell {
     func configure(movieDetailsViewModel: MovieDetailsViewModelProtocol) {
         guard let movieDetails = movieDetailsViewModel.movieDetails else { return }
 
-        var genresSring = ""
+        var genresSring = Constants.emptyString
 
         for genre in movieDetails.genres {
-            genresSring.append(genre.name + " ")
+            genresSring.append(genre.name + Constants.spaceSeparator)
         }
-        runtimeLabel.text = String(format: "%d ч. %d мин.", movieDetails.runtime / 60, movieDetails.runtime % 60)
+        runtimeLabel.text = String(
+            format: Constants.runtimeFormat,
+            movieDetails.runtime / 60,
+            movieDetails.runtime % 60
+        )
 
         titleLabel.attributedText = NSMutableAttributedString().bold("\(movieDetails.title)")
 
         originalTitleLabel.attributedText =
             NSMutableAttributedString()
                 .normal("\(movieDetails.originalTitle) ")
-                .normalGray("(\(movieDetails.releaseDate.components(separatedBy: "-").first ?? ""))")
+                .normalGray(
+                    "(\(movieDetails.releaseDate.components(separatedBy: Constants.minusSeparator).first ?? Constants.emptyString))"
+                )
         genresLabel.text = genresSring
         taglineLabel.text = movieDetails.tagline
         overviewLabel.attributedText =
             NSMutableAttributedString()
-                .bold("Описание\n")
-                .normal("\n\(movieDetails.overview)")
+                .bold(Constants.description)
+                .normal("\(Constants.newLine)\(movieDetails.overview)")
     }
 
     // MARK: - Private Methods

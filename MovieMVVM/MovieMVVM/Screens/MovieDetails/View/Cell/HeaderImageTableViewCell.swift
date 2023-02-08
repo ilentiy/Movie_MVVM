@@ -23,6 +23,10 @@ class HeaderImageTableViewCell: UITableViewCell {
         return imageView
     }()
 
+    // MARK: - Public Properties
+
+    weak var alertDelegate: AlertDelegateProtocol?
+
     // MARK: - Init
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -34,10 +38,6 @@ class HeaderImageTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    // MARK: - Public Properties
-
-    weak var alertDelegate: AlertDelegateProtocol?
 
     // MARK: - Public Methods
 
@@ -54,9 +54,7 @@ class HeaderImageTableViewCell: UITableViewCell {
             guard let self = self else { return }
             switch result {
             case let .success(data):
-                DispatchQueue.main.async {
-                    self.posterImageView.image = UIImage(data: data)
-                }
+                self.posterImageView.image = UIImage(data: data)
             case let .failure(error):
                 self.alertDelegate?.showAlert(error: error)
             }
@@ -69,9 +67,7 @@ class HeaderImageTableViewCell: UITableViewCell {
             guard let self = self else { return }
             switch result {
             case let .success(data):
-                DispatchQueue.main.async {
-                    self.backdropImageView.image = UIImage(data: data)
-                }
+                self.backdropImageView.image = UIImage(data: data)
             case let .failure(error):
                 self.alertDelegate?.showAlert(error: error)
             }

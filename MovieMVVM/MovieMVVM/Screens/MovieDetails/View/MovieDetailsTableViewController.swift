@@ -12,10 +12,15 @@ final class MovieDetailsTableViewController: UITableViewController {
         case description
     }
 
-    // MARK: - Private Property
+    // MARK: - Private Properties
 
     private let tableCellTypes: [TableCellTypes] = [.header, .description]
+
+    // MARK: - Public Properties
+
     var movieDetailsViewModel: MovieDetailsViewModelProtocol?
+
+    // MARK: - Init
 
     init(viewModel: MovieDetailsViewModelProtocol) {
         movieDetailsViewModel = viewModel
@@ -24,7 +29,7 @@ final class MovieDetailsTableViewController: UITableViewController {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constants.fatalError)
     }
 
     // MARK: - Life Cycle
@@ -44,13 +49,6 @@ final class MovieDetailsTableViewController: UITableViewController {
         tableView.allowsSelection = false
         refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
-        movieDetailsViewModel?.updateView?()
-    }
-
-    @objc private func refreshAction() {
-        tableView.refreshControl?.beginRefreshing()
-        movieDetailsViewModel?.updateView?()
-        tableView.refreshControl?.endRefreshing()
     }
 
     private func updateView() {
@@ -81,6 +79,12 @@ final class MovieDetailsTableViewController: UITableViewController {
                 self.showAlert(error: error)
             }
         }
+    }
+
+    @objc private func refreshAction() {
+        tableView.refreshControl?.beginRefreshing()
+        movieDetailsViewModel?.updateView?()
+        tableView.refreshControl?.endRefreshing()
     }
 
     // MARK: - Table view data source

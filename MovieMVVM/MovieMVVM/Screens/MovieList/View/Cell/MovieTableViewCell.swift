@@ -7,10 +7,43 @@ import UIKit
 final class MovieTableViewCell: UITableViewCell {
     // MARK: - Private Visual Component
 
-    lazy var posterImageView = makePosterImageView()
-    lazy var titleLabel = makeTitleLabel()
-    lazy var overviewLabel = makeOverviewLabel()
-    lazy var voteAverageLabel = makeVoteAverageLabel()
+    private let posterImageView: UIImageView = {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 150, height: 200))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        return label
+    }()
+
+    private let overviewLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.font = .systemFont(ofSize: 13)
+        return label
+    }()
+
+    private let voteAverageLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.layer.cornerRadius = 15
+        label.layer.borderColor = UIColor.yellow.cgColor
+        label.textAlignment = .center
+        label.font = .systemFont(ofSize: 12, weight: .heavy)
+        label.textColor = .label
+        label.clipsToBounds = true
+        label.backgroundColor = .red
+        return label
+    }()
 
     // MARK: - Public Properties
 
@@ -25,7 +58,7 @@ final class MovieTableViewCell: UITableViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constants.fatalError)
     }
 
     // MARK: - Public Methods
@@ -45,7 +78,7 @@ final class MovieTableViewCell: UITableViewCell {
         default:
             voteAverageLabel.backgroundColor = .clear
         }
-        voteAverageLabel.text = String(format: "%.1f", movie.voteAverage)
+        voteAverageLabel.text = String(format: Constants.voteFormat, movie.voteAverage)
     }
 
     // MARK: - Private Methods
@@ -66,12 +99,9 @@ final class MovieTableViewCell: UITableViewCell {
             guard let self = self else { return }
             switch result {
             case let .success(data):
-                DispatchQueue.main.async {
-                    self.posterImageView.image = UIImage(data: data)
-                }
+                self.posterImageView.image = UIImage(data: data)
             case let .failure(error):
-                break
-                //    self.alertDelegate?.showAlert(error: error)
+                self.alertDelegate?.showAlert(error: error)
             }
         }
     }
@@ -81,8 +111,9 @@ final class MovieTableViewCell: UITableViewCell {
             posterImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             posterImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             posterImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
-            posterImageView.widthAnchor.constraint(equalTo: posterImageView.heightAnchor, multiplier: 0.75),
             posterImageView.heightAnchor.constraint(equalToConstant: 200),
+            posterImageView.widthAnchor.constraint(equalToConstant: 150),
+
         ])
     }
 
@@ -109,7 +140,7 @@ final class MovieTableViewCell: UITableViewCell {
             overviewLabel.leadingAnchor.constraint(equalTo: posterImageView.trailingAnchor, constant: 10),
             overviewLabel.topAnchor.constraint(equalTo: voteAverageLabel.bottomAnchor, constant: 5),
             overviewLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            overviewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15),
+            overviewLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10),
         ])
     }
 }

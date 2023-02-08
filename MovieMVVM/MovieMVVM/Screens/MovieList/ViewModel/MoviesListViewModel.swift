@@ -3,6 +3,7 @@
 
 import Foundation
 
+/// Вью модель списка фильмов
 final class MoviesListViewModel: MovieListViewModelProtocol {
     // MARK: - Public Properties
 
@@ -36,6 +37,10 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
         }
     }
 
+    func fetchMovieList() {
+        fetchMovies(category: .popular)
+    }
+
     func loadImageData(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
         imageService?.getImage(url: url) { result in
             switch result {
@@ -50,11 +55,14 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
     // MARK: - Private Methods
 
     private func fetchMovies(category: Category) {
+        movieListViewStates?(.loading)
         networkService?.fetchMovies(category: category) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(movies):
-                self.movies = movies
+                DispatchQueue.main.async {
+                    self.movies = movies
+                }
                 self.movieListViewStates?(.success)
             case let .failure(error):
                 self.movieListViewStates?(.failure(error))

@@ -25,7 +25,9 @@ final class ImageAPIService: ImageAPIServiceProtocol {
                 completion(.failure(error))
             }
             guard let data = data else { return }
-            completion(.success(data))
+            DispatchQueue.main.async {
+                completion(.success(data))
+            }
         }
         .resume()
     }

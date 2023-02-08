@@ -3,24 +3,6 @@
 
 import Foundation
 
-/// Категории фильмов
-enum Category {
-    case top
-    case popular
-    case upcoming
-
-    var categoryString: String {
-        switch self {
-        case .popular:
-            return "popular"
-        case .top:
-            return "top_rated"
-        case .upcoming:
-            return "upcoming"
-        }
-    }
-}
-
 /// Базовые ссылки
 enum BaseURL {
     static let movies = "https://api.themoviedb.org/3/movie/"
@@ -69,6 +51,14 @@ enum Constants {
     static let loginViewController = "LoginViewController"
     static let recoveryViewController = "RecoveryViewController"
     static let mainViewController = "MainViewController"
+    static let fatalError = "init(coder:) has not been implemented"
+    static let runtimeFormat = "%d ч. %d мин."
+    static let emptyString = ""
+    static let spaceSeparator = " "
+    static let minusSeparator: String = "-"
+    static let description = "Описание\n"
+    static let newLine = "\n"
+    static let voteFormat = "%.1f"
 }
 
 /// Псевдоним Типа
