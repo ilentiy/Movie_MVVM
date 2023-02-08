@@ -5,10 +5,10 @@ import Foundation
 
 /// Сервис по кэшированию изображений
 final class ImageService: ImageServiceProtocol {
-    // MARK: - Public Properties
+    // MARK: - Private Properties
 
-    let imageAPIService = ImageAPIService()
-    let fileManagerService = FileManagerService()
+    private let imageAPIService = ImageAPIService()
+    private let fileManagerService = FileManagerService()
 
     // MARK: - Public Methods
 

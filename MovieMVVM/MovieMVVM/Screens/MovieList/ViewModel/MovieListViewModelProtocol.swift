@@ -5,14 +5,8 @@ import Foundation
 
 /// Протокол вьюмодели  экрана  списка фильмов
 protocol MovieListViewModelProtocol {
-    // MARK: - Public Properties
-
     var movies: [Movie]? { get set }
-    var imageService: ImageServiceProtocol? { get set }
-    var networkService: NetworkServiceProtocol? { get set }
     var movieListViewStates: ((MovieListViewStates) -> ())? { get set }
-
-    // MARK: - Public Methods
 
     func fetchMoviesType(index: Int)
     func fetchMovieList()

@@ -5,7 +5,11 @@ import Foundation
 
 /// Координатор приложения
 final class ApplicationCoordinator: BaseCoordinator {
-    var assemblyModuleBuilder: AssemblyBuilderProtocol?
+    // MARK: - Private Properties
+
+    private var assemblyModuleBuilder: AssemblyBuilderProtocol?
+
+    // MARK: - Init
 
     init(assemblyModuleBuilder: AssemblyBuilderProtocol) {
         self.assemblyModuleBuilder = assemblyModuleBuilder
@@ -21,7 +25,7 @@ final class ApplicationCoordinator: BaseCoordinator {
     // MARK: Private Methods
 
     private func toMovieList(assemblyModuleBuilder: AssemblyBuilderProtocol) {
-        let coordinator = MovieListCoordinator(assemblyModuleBuilder: assemblyModuleBuilder)
+        let coordinator = MovieCoordinator(assemblyModuleBuilder: assemblyModuleBuilder)
         addDependency(coordinator)
         coordinator.start()
     }

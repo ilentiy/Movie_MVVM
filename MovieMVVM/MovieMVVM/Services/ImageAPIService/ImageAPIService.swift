@@ -5,18 +5,11 @@ import Foundation
 
 /// Сервис получения даты изображения из сети
 final class ImageAPIService: ImageAPIServiceProtocol {
-    // MARK: - Private Constants
+    // MARK: - Private Enum
 
     private enum Constants {
         static let imagePathUrl = "https://image.tmdb.org/t/p/w500"
     }
-
-    // MARK: - Public Properties
-
-    let sessionConfiguration = URLSessionConfiguration.default
-    let decoder = JSONDecoder()
-
-    lazy var session = URLSession.shared
 
     // MARK: - Public Methods
 

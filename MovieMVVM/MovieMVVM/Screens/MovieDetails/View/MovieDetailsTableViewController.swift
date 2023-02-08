@@ -15,10 +15,7 @@ final class MovieDetailsTableViewController: UITableViewController {
     // MARK: - Private Properties
 
     private let tableCellTypes: [TableCellTypes] = [.header, .description]
-
-    // MARK: - Public Properties
-
-    var movieDetailsViewModel: MovieDetailsViewModelProtocol?
+    private var movieDetailsViewModel: MovieDetailsViewModelProtocol?
 
     // MARK: - Init
 

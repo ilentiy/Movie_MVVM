@@ -8,9 +8,12 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
     // MARK: - Public Properties
 
     var movies: [Movie]?
-    var imageService: ImageServiceProtocol?
-    var networkService: NetworkServiceProtocol?
     var movieListViewStates: ((MovieListViewStates) -> ())?
+
+    // MARK: - Private Properties
+
+    private var imageService: ImageServiceProtocol?
+    private var networkService: NetworkServiceProtocol?
 
     // MARK: - Init
 
@@ -62,8 +65,8 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
             case let .success(movies):
                 DispatchQueue.main.async {
                     self.movies = movies
+                    self.movieListViewStates?(.success)
                 }
-                self.movieListViewStates?(.success)
             case let .failure(error):
                 self.movieListViewStates?(.failure(error))
             }

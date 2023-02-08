@@ -7,10 +7,8 @@ import Foundation
 protocol MovieDetailsViewModelProtocol {
     // MARK: - Public Properties
 
-    var movieDetails: MovieDetails? { get set }
+    var movieDetails: MovieDetail? { get set }
     var movieId: Int? { get set }
-    var imageService: ImageServiceProtocol? { get set }
-    var networkService: NetworkServiceProtocol? { get set }
     var updateView: VoidHandler? { get set }
     var showErrorAlert: ErrorHandler? { get set }
 

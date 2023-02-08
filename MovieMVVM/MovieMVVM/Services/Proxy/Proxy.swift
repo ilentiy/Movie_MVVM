@@ -5,10 +5,10 @@ import Foundation
 
 /// Прокси
 final class Proxy: ProxyProtocol {
-    // MARK: - Public Properties
+    // MARK: - Private Properties
 
-    let imageAPIService: ImageAPIServiceProtocol
-    let fileManagerService: FileManagerServiceProtocol
+    private let imageAPIService: ImageAPIServiceProtocol
+    private let fileManagerService: FileManagerServiceProtocol
 
     // MARK: - Init
 

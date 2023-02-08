@@ -92,7 +92,7 @@ final class MainInfoTableViewCell: UITableViewCell {
         var genresSring = Constants.emptyString
 
         for genre in movieDetails.genres {
-            genresSring.append(genre.name + Constants.spaceSeparator)
+            genresSring.append("\(genre.name) ")
         }
         runtimeLabel.text = String(
             format: Constants.runtimeFormat,

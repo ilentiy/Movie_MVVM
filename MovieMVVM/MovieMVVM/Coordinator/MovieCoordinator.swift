@@ -1,10 +1,10 @@
-// MovieListCoordinator.swift
+// MovieCoordinator.swift
 // Copyright © RoadMap. All rights reserved.
 
 import UIKit
 
-/// Координатор главного экрана
-final class MovieListCoordinator: BaseCoordinator {
+/// Координатор флоу муви
+final class MovieCoordinator: BaseCoordinator {
     // MARK: - Private Visual Component
 
     private var rootController: UINavigationController?

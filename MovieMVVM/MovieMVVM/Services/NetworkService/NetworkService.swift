@@ -7,7 +7,7 @@ import Foundation
 final class NetworkService: NetworkServiceProtocol {
     // MARK: - Public Methods
 
-    func fetchMovieDetails(id: Int, completion: @escaping (Result<MovieDetails, Error>) -> Void) {
+    func fetchMovieDetails(id: Int, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
         guard
             let url = URL(string: "\(BaseURL.movies)\(id)\(BaseURL.apiKey)")
         else { return }
@@ -17,10 +17,8 @@ final class NetworkService: NetworkServiceProtocol {
             }
             if let data = data {
                 do {
-                    let movieDetails = try JSONDecoder().decode(MovieDetails.self, from: data)
-                    DispatchQueue.main.async {
-                        completion(.success(movieDetails))
-                    }
+                    let movieDetails = try JSONDecoder().decode(MovieDetail.self, from: data)
+                    completion(.success(movieDetails))
                 } catch {
                     completion(.failure(error))
                 }
@@ -40,9 +38,7 @@ final class NetworkService: NetworkServiceProtocol {
             guard let data = data else { return }
             do {
                 let movies = try JSONDecoder().decode(Results.self, from: data).movies
-                DispatchQueue.main.async {
-                    completion(.success(movies))
-                }
+                completion(.success(movies))
             } catch {
                 completion(.failure(error))
             }

@@ -8,11 +8,14 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
     // MARK: - Public properties
 
     var movieId: Int?
-    var movieDetails: MovieDetails?
-    var networkService: NetworkServiceProtocol?
-    var imageService: ImageServiceProtocol?
+    var movieDetails: MovieDetail?
     var updateView: VoidHandler?
     var showErrorAlert: ErrorHandler?
+
+    // MARK: - Private Properties
+
+    private var networkService: NetworkServiceProtocol?
+    private var imageService: ImageServiceProtocol?
 
     // MARK: - Init
 
@@ -33,11 +36,11 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
     }
 
     func loadImageData(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        imageService?.getImage(url: url) { result in
+        imageService?.getImage(url: url) { [weak self] result in
             switch result {
             case let .success(data):
                 completion(.success(data))
-                self.updateView?()
+                self?.updateView?()
             case let .failure(error):
                 completion(.failure(error))
             }

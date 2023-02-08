@@ -1,10 +1,10 @@
-// MovieDetails.swift
+// MovieDetail.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
 /// Подробная Информация о фильме
-struct MovieDetails: Codable {
+struct MovieDetail: Codable {
     enum CodingKeys: String, CodingKey {
         case backdropPath = "backdrop_path"
         case budget

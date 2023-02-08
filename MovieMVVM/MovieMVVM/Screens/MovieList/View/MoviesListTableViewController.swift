@@ -56,13 +56,16 @@ final class MoviesListTableViewController: UITableViewController {
 
     // MARK: - Public Properties
 
-    var movieListViewModel: MovieListViewModelProtocol?
     var onFinishFlow: IntHandler?
     var movieListViewStates: MovieListViewStates = .initial {
         didSet {
-            tableView.setNeedsLayout()
+            view.setNeedsLayout()
         }
     }
+
+    // MARK: - Private Properties
+
+    private var movieListViewModel: MovieListViewModelProtocol?
 
     // MARK: - Init
 
@@ -80,29 +83,13 @@ final class MoviesListTableViewController: UITableViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        switch movieListViewStates {
-        case .initial:
-            setupUI()
-        case .loading:
-            activityIndicatorView.startAnimating()
-            activityIndicatorView.isHidden = false
-        case .success:
-            activityIndicatorView.stopAnimating()
-            activityIndicatorView.isHidden = true
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        case let .failure(error):
-            activityIndicatorView.stopAnimating()
-            activityIndicatorView.isHidden = true
-            showAlert(error: error)
-        }
+        changeState()
     }
 
     // MARK: - Private Methods
 
     private func setupUI() {
-        setupListMoviesStates()
+        movieListViewStates = .loading
         navigationController?.navigationBar.isTranslucent = false
         title = Title.Screen.movieList
         view.addSubview(stackView)
@@ -120,7 +107,25 @@ final class MoviesListTableViewController: UITableViewController {
             MovieTableViewCell.self,
             forCellReuseIdentifier: Identifiers.cell
         )
-        fetchMoviesList()
+    }
+
+    private func changeState() {
+        switch movieListViewStates {
+        case .initial:
+            setupUI()
+            fetchMoviesList()
+        case .loading:
+            activityIndicatorView.startAnimating()
+            activityIndicatorView.isHidden = false
+        case .success:
+            activityIndicatorView.stopAnimating()
+            activityIndicatorView.isHidden = true
+            tableView.reloadData()
+        case let .failure(error):
+            activityIndicatorView.stopAnimating()
+            activityIndicatorView.isHidden = true
+            showAlert(error: error)
+        }
     }
 
     private func fetchMoviesList() {
