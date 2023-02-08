@@ -3,11 +3,22 @@
 
 import Foundation
 
-/// Urls
+/// Категории фильмов
 enum Category {
-    static let top = "top_rated"
-    static let popular = "popular"
-    static let upcoming = "upcoming"
+    case top
+    case popular
+    case upcoming
+
+    var categoryString: String {
+        switch self {
+        case .popular:
+            return "popular"
+        case .top:
+            return "top_rated"
+        case .upcoming:
+            return "upcoming"
+        }
+    }
 }
 
 /// Базовые ссылки
@@ -38,3 +49,28 @@ enum Title {
         static let movieList = "Список Фильмов"
     }
 }
+
+/// Константы для алерта
+enum AlertConstants {
+    static let errorTitle = "Ошибка"
+    static let errorMessageText = "Ошибка парсинга"
+    static let actionTitle = "Ok"
+    static let emptyString = ""
+}
+
+/// Констатнты
+enum Constants {
+    static let keyText = "isLogin"
+    static let login = "admin"
+    static let password = "admin"
+    static let passwordText = "Пароль"
+    static let okText = "OK"
+    static let storyboardName = "Main"
+    static let loginViewController = "LoginViewController"
+    static let recoveryViewController = "RecoveryViewController"
+    static let mainViewController = "MainViewController"
+}
+
+/// Псевдоним Типа
+typealias VoidHandler = () -> ()
+typealias ErrorHandler = (Error) -> ()

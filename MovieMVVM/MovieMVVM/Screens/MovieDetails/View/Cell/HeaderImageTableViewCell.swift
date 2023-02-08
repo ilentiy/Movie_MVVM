@@ -35,17 +35,48 @@ class HeaderImageTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    // MARK: - Public Properties
+
+    weak var alertDelegate: AlertDelegateProtocol?
+
     // MARK: - Public Methods
 
-    func updateCell(movie: MovieDetail) {
-        guard let posterURL = URL(string: BaseURL.image + movie.posterPath),
-              let backdropPathURL = URL(string: BaseURL.image + movie.backdropPath)
-        else { return }
-        posterImageView.load(url: posterURL)
-        backdropImageView.load(url: backdropPathURL)
+    func configure(movieDetailsViewModel: MovieDetailsViewModelProtocol) {
+        setupPosterImage(movieDetailsViewModel: movieDetailsViewModel)
+        setupBackdropImage(movieDetailsViewModel: movieDetailsViewModel)
     }
 
     // MARK: - Private Methods
+
+    private func setupPosterImage(movieDetailsViewModel: MovieDetailsViewModelProtocol) {
+        guard let url = movieDetailsViewModel.movieDetails?.posterPath else { return }
+        movieDetailsViewModel.loadImageData(url: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.posterImageView.image = UIImage(data: data)
+                }
+            case let .failure(error):
+                self.alertDelegate?.showAlert(error: error)
+            }
+        }
+    }
+
+    private func setupBackdropImage(movieDetailsViewModel: MovieDetailsViewModelProtocol) {
+        guard let url = movieDetailsViewModel.movieDetails?.backdropPath else { return }
+        movieDetailsViewModel.loadImageData(url: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.backdropImageView.image = UIImage(data: data)
+                }
+            case let .failure(error):
+                self.alertDelegate?.showAlert(error: error)
+            }
+        }
+    }
 
     private func setupUI() {
         addSubview(backdropImageView)

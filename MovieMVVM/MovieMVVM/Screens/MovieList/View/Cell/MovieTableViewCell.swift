@@ -5,45 +5,16 @@ import UIKit
 
 ///  Прототип ячейки типа списка фильма
 final class MovieTableViewCell: UITableViewCell {
-    // MARK: - Pivate Visual Component
+    // MARK: - Private Visual Component
 
-    private let posterImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
+    lazy var posterImageView = makePosterImageView()
+    lazy var titleLabel = makeTitleLabel()
+    lazy var overviewLabel = makeOverviewLabel()
+    lazy var voteAverageLabel = makeVoteAverageLabel()
 
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
-        label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 14, weight: .bold)
-        return label
-    }()
+    // MARK: - Public Properties
 
-    private let overviewLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.lineBreakMode = .byWordWrapping
-        label.font = .systemFont(ofSize: 13)
-        return label
-    }()
-
-    private let voteAverageLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.layer.cornerRadius = 15
-        label.layer.borderColor = UIColor.yellow.cgColor
-        label.textAlignment = .center
-        label.font = .systemFont(ofSize: 12, weight: .heavy)
-        label.textColor = .label
-        label.clipsToBounds = true
-        label.backgroundColor = .red
-        return label
-    }()
+    weak var alertDelegate: AlertDelegateProtocol?
 
     // MARK: - Init
 
@@ -59,9 +30,9 @@ final class MovieTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func updateCell(movie: Movie) {
-        guard let url = URL(string: BaseURL.image + movie.posterPath) else { return }
-        posterImageView.load(url: url)
+    func configure(index: Int, movieListViewModel: MovieListViewModelProtocol) {
+        guard let movie = movieListViewModel.movies?[index] else { return }
+        setupPosterImage(url: movie.posterPath, movieListViewModel: movieListViewModel)
         titleLabel.text = "\(movie.title)"
         overviewLabel.text = movie.overview
         switch movie.voteAverage {
@@ -88,6 +59,21 @@ final class MovieTableViewCell: UITableViewCell {
         overviewLabelConstraints()
         titleLabelConstraints()
         voteAverageLabelConstraints()
+    }
+
+    private func setupPosterImage(url: String, movieListViewModel: MovieListViewModelProtocol) {
+        movieListViewModel.loadImageData(url: url) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(data):
+                DispatchQueue.main.async {
+                    self.posterImageView.image = UIImage(data: data)
+                }
+            case let .failure(error):
+                break
+                //    self.alertDelegate?.showAlert(error: error)
+            }
+        }
     }
 
     private func posterImageViewConstraints() {

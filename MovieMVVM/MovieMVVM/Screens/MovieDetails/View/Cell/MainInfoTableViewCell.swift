@@ -86,26 +86,28 @@ final class MainInfoTableViewCell: UITableViewCell {
 
     // MARK: - Public Methods
 
-    func updateCell(movie: MovieDetail) {
+    func configure(movieDetailsViewModel: MovieDetailsViewModelProtocol) {
+        guard let movieDetails = movieDetailsViewModel.movieDetails else { return }
+
         var genresSring = ""
 
-        for genre in movie.genres {
+        for genre in movieDetails.genres {
             genresSring.append(genre.name + " ")
         }
-        runtimeLabel.text = String(format: "%d ч. %d мин.", movie.runtime / 60, movie.runtime % 60)
+        runtimeLabel.text = String(format: "%d ч. %d мин.", movieDetails.runtime / 60, movieDetails.runtime % 60)
 
-        titleLabel.attributedText = NSMutableAttributedString().bold("\(movie.title)")
+        titleLabel.attributedText = NSMutableAttributedString().bold("\(movieDetails.title)")
 
         originalTitleLabel.attributedText =
             NSMutableAttributedString()
-                .normal("\(movie.originalTitle) ")
-                .normalGray("(\(movie.releaseDate.components(separatedBy: "-").first ?? ""))")
+                .normal("\(movieDetails.originalTitle) ")
+                .normalGray("(\(movieDetails.releaseDate.components(separatedBy: "-").first ?? ""))")
         genresLabel.text = genresSring
-        taglineLabel.text = movie.tagline
+        taglineLabel.text = movieDetails.tagline
         overviewLabel.attributedText =
             NSMutableAttributedString()
                 .bold("Описание\n")
-                .normal("\n\(movie.overview)")
+                .normal("\n\(movieDetails.overview)")
     }
 
     // MARK: - Private Methods
