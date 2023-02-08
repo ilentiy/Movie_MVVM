@@ -63,6 +63,9 @@ enum Constants {
 }
 
 /// Псевдоним Типа
-typealias VoidHandler = () -> ()
-typealias ErrorHandler = (Error) -> ()
-typealias IntHandler = (Int) -> ()
+// swiftlint:disable all
+typealias VoidHandler = () -> Void
+// swiftlint:enable all
+typealias ErrorHandler = (Error) -> Void
+typealias IntHandler = (Int) -> Void
+typealias Closure = ((String) -> Void)?

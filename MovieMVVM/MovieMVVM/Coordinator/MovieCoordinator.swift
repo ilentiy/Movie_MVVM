@@ -14,7 +14,7 @@ final class MovieCoordinator: BaseCoordinator {
     private var onFinishFlow: VoidHandler?
     private var assemblyModuleBuilder: AssemblyBuilderProtocol?
 
-    // MARK: -   Init
+    // MARK: - Init
 
     init(assemblyModuleBuilder: AssemblyBuilderProtocol) {
         self.assemblyModuleBuilder = assemblyModuleBuilder

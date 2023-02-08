@@ -32,6 +32,8 @@
 		096817C2299197400047AF01 /* MovieCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 096817C0299197400047AF01 /* MovieCoordinator.swift */; };
 		09790F822992DD19002433D6 /* AlertDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09790F812992DD19002433D6 /* AlertDelegateProtocol.swift */; };
 		09790F842992E7B8002433D6 /* MovieListViewStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09790F832992E7B8002433D6 /* MovieListViewStates.swift */; };
+		0986252029941A8400D51189 /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0986251E29941A8400D51189 /* KeyChainService.swift */; };
+		0986252129941A8400D51189 /* KeyChainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0986251F29941A8400D51189 /* KeyChainServiceProtocol.swift */; };
 		098CFACE2991BB3100905AE4 /* MovieListViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098CFACD2991BB3100905AE4 /* MovieListViewModelProtocol.swift */; };
 		098CFAD02991BB7F00905AE4 /* MoviesListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098CFACF2991BB7F00905AE4 /* MoviesListViewModel.swift */; };
 		09ADA30129085B4200583C53 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09ADA30029085B4200583C53 /* Results.swift */; };
@@ -45,6 +47,7 @@
 		09FF40612906EDFD001D73A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09FF40602906EDFD001D73A7 /* Assets.xcassets */; };
 		09FF40642906EDFD001D73A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09FF40622906EDFD001D73A7 /* LaunchScreen.storyboard */; };
 		09FF40702906F33D001D73A7 /* MoviesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09FF406F2906F33D001D73A7 /* MoviesListTableViewController.swift */; };
+		C2D16A77E4F345C819257752 /* Pods_MovieMVVM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F80161D9F406A9F46B634544 /* Pods_MovieMVVM.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +76,8 @@
 		096817C0299197400047AF01 /* MovieCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieCoordinator.swift; sourceTree = "<group>"; };
 		09790F812992DD19002433D6 /* AlertDelegateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertDelegateProtocol.swift; sourceTree = "<group>"; };
 		09790F832992E7B8002433D6 /* MovieListViewStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewStates.swift; sourceTree = "<group>"; };
+		0986251E29941A8400D51189 /* KeyChainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
+		0986251F29941A8400D51189 /* KeyChainServiceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyChainServiceProtocol.swift; sourceTree = "<group>"; };
 		098CFACD2991BB3100905AE4 /* MovieListViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModelProtocol.swift; sourceTree = "<group>"; };
 		098CFACF2991BB7F00905AE4 /* MoviesListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewModel.swift; sourceTree = "<group>"; };
 		09ADA30029085B4200583C53 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
@@ -88,6 +93,9 @@
 		09FF40632906EDFD001D73A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09FF40652906EDFD001D73A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09FF406F2906F33D001D73A7 /* MoviesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListTableViewController.swift; sourceTree = "<group>"; };
+		5B47D086C0483FA2ED8F62F1 /* Pods-MovieMVVM.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieMVVM.release.xcconfig"; path = "Target Support Files/Pods-MovieMVVM/Pods-MovieMVVM.release.xcconfig"; sourceTree = "<group>"; };
+		9811632DE92692FA623C3330 /* Pods-MovieMVVM.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieMVVM.debug.xcconfig"; path = "Target Support Files/Pods-MovieMVVM/Pods-MovieMVVM.debug.xcconfig"; sourceTree = "<group>"; };
+		F80161D9F406A9F46B634544 /* Pods_MovieMVVM.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieMVVM.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2D16A77E4F345C819257752 /* Pods_MovieMVVM.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -139,6 +148,7 @@
 				096817A1299174110047AF01 /* FileManagerService */,
 				096817A7299174120047AF01 /* ImageAPIService */,
 				09681798299174100047AF01 /* ImageService */,
+				0986251D29941A8400D51189 /* Keychain */,
 				0968179E299174110047AF01 /* NetworkService */,
 				09681795299174100047AF01 /* Proxy */,
 			);
@@ -289,6 +299,15 @@
 			path = ImageAPIService;
 			sourceTree = "<group>";
 		};
+		0986251D29941A8400D51189 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				0986251E29941A8400D51189 /* KeyChainService.swift */,
+				0986251F29941A8400D51189 /* KeyChainServiceProtocol.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 		09E829E5290920F5001550AD /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +322,8 @@
 			children = (
 				09FF40562906EDFB001D73A7 /* MovieMVVM */,
 				09FF40552906EDFB001D73A7 /* Products */,
+				B2C0ACB8010EA38DC3B29958 /* Pods */,
+				35AB96E164B45F9FA13F9522 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -332,6 +353,23 @@
 			path = MovieMVVM;
 			sourceTree = "<group>";
 		};
+		35AB96E164B45F9FA13F9522 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F80161D9F406A9F46B634544 /* Pods_MovieMVVM.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B2C0ACB8010EA38DC3B29958 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9811632DE92692FA623C3330 /* Pods-MovieMVVM.debug.xcconfig */,
+				5B47D086C0483FA2ED8F62F1 /* Pods-MovieMVVM.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -339,11 +377,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 09FF40682906EDFD001D73A7 /* Build configuration list for PBXNativeTarget "MovieMVVM" */;
 			buildPhases = (
+				DFE12D2FFEECD809D1321166 /* [CP] Check Pods Manifest.lock */,
 				09FF40502906EDFB001D73A7 /* Sources */,
 				09FF40512906EDFB001D73A7 /* Frameworks */,
 				09FF40522906EDFB001D73A7 /* Resources */,
 				09FF406B2906EE41001D73A7 /* swiftFormat */,
 				09FF406C2906EE95001D73A7 /* swiftLint */,
+				3A1B59F6F961BAC7D24E73B4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -421,7 +461,7 @@
 		};
 		09FF406C2906EE95001D73A7 /* swiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			files = (
 			);
 			inputFileListPaths = (
@@ -433,9 +473,48 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		3A1B59F6F961BAC7D24E73B4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieMVVM/Pods-MovieMVVM-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MovieMVVM/Pods-MovieMVVM-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MovieMVVM/Pods-MovieMVVM-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DFE12D2FFEECD809D1321166 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MovieMVVM-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -465,10 +544,12 @@
 				09174A022993B0D3003A4DFD /* UIViewController+Extension.swift in Sources */,
 				09065CC729927A8B000607CB /* MovieDetailsViewModelProtocol.swift in Sources */,
 				095FA69829088DEB00BCCD20 /* MovieTableViewCell.swift in Sources */,
+				0986252029941A8400D51189 /* KeyChainService.swift in Sources */,
 				096817BD299195F80047AF01 /* BaseCoordinator.swift in Sources */,
 				09EA526C290C5E9600328F66 /* Constants.swift in Sources */,
 				096817B1299174130047AF01 /* NetworkService.swift in Sources */,
 				09FF40582906EDFB001D73A7 /* AppDelegate.swift in Sources */,
+				0986252129941A8400D51189 /* KeyChainServiceProtocol.swift in Sources */,
 				096817AA299174130047AF01 /* Proxy.swift in Sources */,
 				096817B7299174130047AF01 /* ImageAPIServiceProtocol.swift in Sources */,
 				096817AD299174130047AF01 /* ImageServiceProtocol.swift in Sources */,
@@ -620,6 +701,7 @@
 		};
 		09FF40692906EDFD001D73A7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9811632DE92692FA623C3330 /* Pods-MovieMVVM.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -648,6 +730,7 @@
 		};
 		09FF406A2906EDFD001D73A7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B47D086C0483FA2ED8F62F1 /* Pods-MovieMVVM.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

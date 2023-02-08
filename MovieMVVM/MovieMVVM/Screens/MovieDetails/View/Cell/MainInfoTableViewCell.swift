@@ -106,7 +106,7 @@ final class MainInfoTableViewCell: UITableViewCell {
             NSMutableAttributedString()
                 .normal("\(movieDetails.originalTitle) ")
                 .normalGray(
-                    "(\(movieDetails.releaseDate.components(separatedBy: Constants.minusSeparator).first ?? Constants.emptyString))"
+                    "(\(movieDetails.releaseDate.components(separatedBy: Constants.minusSeparator).first ?? ""))"
                 )
         genresLabel.text = genresSring
         taglineLabel.text = movieDetails.tagline
