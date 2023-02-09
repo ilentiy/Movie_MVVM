@@ -88,7 +88,6 @@ final class MainInfoTableViewCell: UITableViewCell {
 
     func configure(movieDetailsViewModel: MovieDetailsViewModelProtocol) {
         guard let movieDetails = movieDetailsViewModel.movieDetails else { return }
-
         var genresSring = Constants.emptyString
 
         for genre in movieDetails.genres {
@@ -96,8 +95,8 @@ final class MainInfoTableViewCell: UITableViewCell {
         }
         runtimeLabel.text = String(
             format: Constants.runtimeFormat,
-            movieDetails.runtime / Constants.divider,
-            movieDetails.runtime % Constants.divider
+            Int(movieDetails.runtime) / Constants.divider,
+            Int(movieDetails.runtime) % Constants.divider
         )
 
         titleLabel.attributedText = NSMutableAttributedString().bold("\(movieDetails.title)")

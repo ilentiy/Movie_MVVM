@@ -167,8 +167,8 @@ final class MoviesListTableViewController: UITableViewController {
     }
 
     private func giveMovieID(index: Int) {
-        guard let movieID = movieListViewModel?.movies?[index].id else { return }
-        onFinishFlow?(movieID)
+        guard let movieID = movieListViewModel?.movies?[index].movieId else { return }
+        onFinishFlow?(Int(movieID))
     }
 
     private func keyChainAlert() {
@@ -183,8 +183,10 @@ final class MoviesListTableViewController: UITableViewController {
     }
 
     private func keychainAlertView() {
-        guard (movieListViewModel?.keychainInfo()?.getValue(Constants.keyText).isEmpty) == nil else { return }
+        //   movieListViewModel?.keychainInfo()?.setValue("", forKey: Constants.keyText)
+        guard (movieListViewModel?.keychainInfo()?.getValue(Constants.keyText)) == "" else { return }
         keyChainAlert()
+        movieListViewStates = .initial
     }
 
     @objc private func refreshAction() {

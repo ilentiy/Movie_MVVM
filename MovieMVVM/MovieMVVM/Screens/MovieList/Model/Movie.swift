@@ -6,9 +6,7 @@ import Foundation
 ///  Фильм
 struct Movie: Codable {
     enum CodingKeys: String, CodingKey {
-        case adult
-        case genreIDS = "genre_ids"
-        case id
+        case movieId = "id"
         case originalTitle = "original_title"
         case overview
         case posterPath = "poster_path"
@@ -17,14 +15,12 @@ struct Movie: Codable {
         case voteAverage = "vote_average"
     }
 
-    /// Взрослый
-    let adult: Bool
-    /// Жанры
-    let genreIDS: [Int]
     ///  Идентификатор фильма
-    let id: Int
+    let movieId: Int
+    /// Оригинальное название
+    let originalTitle: String
     /// Описание
-    let originalTitle, overview: String
+    let overview: String
     /// Путь до изображения постера
     let posterPath: String
     /// Дата выхода

@@ -87,7 +87,7 @@ class HeaderImageTableViewCell: UITableViewCell {
             backdropImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             backdropImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             backdropImageView.widthAnchor.constraint(equalTo: widthAnchor),
-            backdropImageView.heightAnchor.constraint(equalTo: backdropImageView.widthAnchor, multiplier: 0.56),
+            backdropImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.56)
         ])
     }
 

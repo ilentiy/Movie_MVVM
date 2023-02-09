@@ -33,6 +33,7 @@ final class MovieDetailsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        updateView()
         setupUI()
         configureUI()
     }
@@ -40,7 +41,6 @@ final class MovieDetailsTableViewController: UITableViewController {
     // MARK: - Private Methods
 
     private func setupUI() {
-        updateView()
         showErrorAlert()
         movieDetailsViewModel?.loadData()
         tableView.allowsSelection = false

@@ -1,13 +1,15 @@
 // MoviesListViewModel.swift
 // Copyright © Ilenty. All rights reserved.
 
+// import CoreData
 import Foundation
+// import UIKit
 
 /// Вью модель экрана списка фильмов
 final class MoviesListViewModel: MovieListViewModelProtocol {
     // MARK: - Public Properties
 
-    var movies: [Movie]?
+    var movies: [Movie]? = []
     var movieListViewStates: ((MovieListViewStates) -> ())?
 
     // MARK: - Private Properties
@@ -15,17 +17,20 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
     private var imageService: ImageServiceProtocol?
     private var networkService: NetworkServiceProtocol?
     private var keychainService: KeyChainServiceProtocol?
+    private var coreDataService: CoreDataServiceProtocol?
 
     // MARK: - Init
 
     init(
         networkService: NetworkServiceProtocol,
         imageService: ImageServiceProtocol,
-        keychainService: KeyChainServiceProtocol
+        keychainService: KeyChainServiceProtocol,
+        coreDataService: CoreDataServiceProtocol
     ) {
         self.networkService = networkService
         self.imageService = imageService
         self.keychainService = keychainService
+        self.coreDataService = coreDataService
     }
 
     // MARK: - Public Methods
@@ -33,14 +38,36 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
     func fetchMoviesType(index: Int) {
         switch index {
         case 0:
-            fetchMovies(category: .popular)
+            loadMovies(category: .popular)
         case 1:
-            fetchMovies(category: .top)
+            loadMovies(category: .top)
         case 2:
-            fetchMovies(category: .upcoming)
+            loadMovies(category: .upcoming)
         default:
-            fetchMovies(category: .popular)
+            loadMovies(category: .popular)
         }
+    }
+
+    private func loadMovies(category: Category) {
+        movieListViewStates?(.loading)
+        coreDataService?.getMoviesData(category: category.category) { [weak self] result in
+            guard let self = self else { return }
+
+            switch result {
+            case let .success(movies):
+                self.movies = movies
+                self.movieListViewStates?(.success)
+            case let .failure(error):
+                self.movieListViewStates?(.failure(error))
+            }
+        }
+        guard let movies = movies else { return }
+        if !movies.isEmpty {
+            self.movies = movies
+        } else {
+            fetchMovies(category: category)
+        }
+        movieListViewStates?(.success)
     }
 
     func keychainInfo() -> KeyChainServiceProtocol? {
@@ -48,7 +75,7 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
     }
 
     func fetchMovieList() {
-        fetchMovies(category: .popular)
+        loadMovies(category: .popular)
     }
 
     func loadImageData(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
@@ -65,12 +92,12 @@ final class MoviesListViewModel: MovieListViewModelProtocol {
     // MARK: - Private Methods
 
     private func fetchMovies(category: Category) {
-        movieListViewStates?(.loading)
         networkService?.fetchMovies(category: category) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case let .success(movies):
                 self.movies = movies
+                self.coreDataService?.saveMoviesData(movies: movies, category: category.category)
                 self.movieListViewStates?(.success)
             case let .failure(error):
                 self.movieListViewStates?(.failure(error))
