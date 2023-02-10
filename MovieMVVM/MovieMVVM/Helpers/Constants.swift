@@ -7,7 +7,6 @@ import Foundation
 enum BaseURL {
     static let movies = "https://api.themoviedb.org/3/movie/"
     static let image = "https://image.tmdb.org/t/p/w500"
-    //  static let apiKey = "?api_key=5e95e9b030369d612dfb2d6ecdfb4cf2&language=ru-RU"
 }
 
 /// Identifiers

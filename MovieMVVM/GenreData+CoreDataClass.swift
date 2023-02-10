@@ -4,5 +4,6 @@
 import CoreData
 import Foundation
 
+/// Жанры
 @objc(GenreData)
 public class GenreData: MovieDetailData {}

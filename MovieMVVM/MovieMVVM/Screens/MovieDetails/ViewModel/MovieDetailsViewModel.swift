@@ -51,16 +51,15 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
             fetchMovieDetails()
             return
         }
-        updateView?()
     }
 
     func loadImageData(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        imageService?.getImage(url: url) { result in
+        imageService?.getImage(url: url) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .success(data):
-                DispatchQueue.main.async {
-                    completion(.success(data))
-                }
+                completion(.success(data))
+                self.updateView?()
             case let .failure(error):
                 completion(.failure(error))
             }

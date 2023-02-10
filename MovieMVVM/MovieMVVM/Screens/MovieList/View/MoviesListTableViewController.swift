@@ -179,12 +179,11 @@ final class MoviesListTableViewController: UITableViewController {
             guard let self = self else { return }
             self.movieListViewModel?.keychainInfo()?.setValue(token, forKey: Constants.keyText)
         }
-        // tableView.reloadData()
     }
 
     private func keychainAlertView() {
         //   movieListViewModel?.keychainInfo()?.setValue("", forKey: Constants.keyText)
-        guard (movieListViewModel?.keychainInfo()?.getValue(Constants.keyText)) == "" else { return }
+        guard movieListViewModel?.keychainInfo()?.getValue(Constants.keyText) == Constants.emptyString else { return }
         keyChainAlert()
         movieListViewStates = .initial
     }
