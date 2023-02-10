@@ -4,9 +4,12 @@
 import Foundation
 
 /// Базовые ссылки
-enum BaseURL {
-    static let movies = "https://api.themoviedb.org/3/movie/"
-    static let image = "https://image.tmdb.org/t/p/w500"
+enum UrlRequest {
+    static let baseURL = "https://api.themoviedb.org/3/movie/"
+    static let baseImageURL = "https://image.tmdb.org/t/p/w500"
+    static let apiKey = "api_key"
+    static let languageKey = "language"
+    static let languageValue = "ru-RU"
 }
 
 /// Identifiers

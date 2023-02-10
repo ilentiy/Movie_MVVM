@@ -18,9 +18,13 @@ final class NetworkService: NetworkServiceProtocol {
     // MARK: - Public Methods
 
     func fetchMovieDetails(id: Int, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
-        guard
-            let url = URL(string: "\(BaseURL.movies)\(id)\(keychainService?.getValue(Constants.keyText) ?? "")")
-        else { return }
+        guard var urlComponents = URLComponents(string: "\(UrlRequest.baseURL)\(id)") else { return }
+        urlComponents.queryItems = [
+            URLQueryItem(name: UrlRequest.apiKey, value: keychainService?.getValue(Constants.keyText)),
+            URLQueryItem(name: UrlRequest.languageKey, value: UrlRequest.languageValue)
+        ]
+        guard let url = urlComponents.url else { return }
+
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(error))
@@ -38,12 +42,12 @@ final class NetworkService: NetworkServiceProtocol {
     }
 
     func fetchMovies(category: Category, completion: @escaping (Result<[Movie], Error>) -> Void) {
-        guard
-            let url =
-            URL(
-                string: "\(BaseURL.movies)\(category.category)\(keychainService?.getValue(Constants.keyText) ?? "")"
-            )
-        else { return }
+        guard var urlComponents = URLComponents(string: "\(UrlRequest.baseURL)\(category.category)") else { return }
+        urlComponents.queryItems = [
+            URLQueryItem(name: UrlRequest.apiKey, value: keychainService?.getValue(Constants.keyText)),
+            URLQueryItem(name: UrlRequest.languageKey, value: UrlRequest.languageValue)
+        ]
+        guard let url = urlComponents.url else { return }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(error))
