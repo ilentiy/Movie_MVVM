@@ -60,6 +60,7 @@ enum Constants {
     static let newLine = "\n"
     static let voteFormat = "%.1f"
     static let divider = 60
+    static let dataModel = "DataModel"
 }
 
 /// Псевдоним Типа

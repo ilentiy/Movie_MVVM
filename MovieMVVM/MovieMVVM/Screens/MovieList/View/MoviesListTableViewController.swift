@@ -168,7 +168,7 @@ final class MoviesListTableViewController: UITableViewController {
 
     private func giveMovieID(index: Int) {
         guard let movieID = movieListViewModel?.movies?[index].movieId else { return }
-        onFinishFlow?(Int(movieID))
+        onFinishFlow?(movieID)
     }
 
     private func keyChainAlert() {

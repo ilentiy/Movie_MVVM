@@ -11,7 +11,7 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
         let keychainService = KeyChainService()
         let networkService = NetworkService(keychainService: keychainService)
         let imageService = ImageService()
-        let coreDataService = CoreDataService(modelName: "DataModel")
+        let coreDataService = CoreDataService(modelName: Constants.dataModel)
         let movieListViewModel = MoviesListViewModel(
             networkService: networkService,
             imageService: imageService,
@@ -26,7 +26,7 @@ final class AssemblyModuleBuilder: AssemblyBuilderProtocol {
         let keychainService = KeyChainService()
         let networkService = NetworkService(keychainService: keychainService)
         let imageService = ImageService()
-        let coreDataService = CoreDataService(modelName: "DataModel")
+        let coreDataService = CoreDataService(modelName: Constants.dataModel)
         let movieDetailViewModel = MovieDetailsViewModel(
             networkService: networkService,
             imageService: imageService,

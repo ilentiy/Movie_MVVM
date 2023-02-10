@@ -5,9 +5,9 @@ import Foundation
 
 /// Сетевой слой
 final class NetworkService: NetworkServiceProtocol {
-    // MARK: - Public Properties
+    // MARK: - Private Properties
 
-    var keychainService: KeyChainServiceProtocol?
+    private var keychainService: KeyChainServiceProtocol?
 
     // MARK: - Init
 
