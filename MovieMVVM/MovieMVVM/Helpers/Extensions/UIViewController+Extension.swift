@@ -1,5 +1,5 @@
 // UIViewController+Extension.swift
-// Copyright © Ilenty. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import UIKit
 
