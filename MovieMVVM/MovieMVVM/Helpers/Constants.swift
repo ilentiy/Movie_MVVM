@@ -36,7 +36,8 @@ enum AlertConstants {
     static let errorTitle = "Ошибка"
     static let errorMessageText = "Ошибка парсинга"
     static let actionTitle = "Ok"
-    static let emptyString = ""
+    static let tokenTitle = "Запрос токена"
+    static let tokenMessage = "Введите токен"
 }
 
 /// Констатнты
@@ -62,9 +63,7 @@ enum Constants {
 }
 
 /// Псевдоним Типа
-// swiftlint:disable all
 typealias VoidHandler = () -> Void
-// swiftlint:enable all
 typealias ErrorHandler = (Error) -> Void
 typealias IntHandler = (Int) -> Void
 typealias Closure = ((String) -> Void)?

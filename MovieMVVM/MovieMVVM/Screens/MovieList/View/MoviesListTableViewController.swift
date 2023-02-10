@@ -86,6 +86,7 @@ final class MoviesListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupListMoviesStates()
+        keychainAlertView()
         movieListViewStates = .initial
     }
 
@@ -114,7 +115,6 @@ final class MoviesListTableViewController: UITableViewController {
     private func changeState() {
         switch movieListViewStates {
         case .initial:
-            keychainAlertView()
             setupUI()
             fetchMoviesList()
         case .loading:
@@ -173,19 +173,18 @@ final class MoviesListTableViewController: UITableViewController {
 
     private func keyChainAlert() {
         showAPIKeyAlert(
-            title: AlertConstants.errorTitle,
-            message: AlertConstants.errorMessageText
+            title: AlertConstants.tokenTitle,
+            message: AlertConstants.tokenMessage
         ) { [weak self] token in
             guard let self = self else { return }
             self.movieListViewModel?.keychainInfo()?.setValue(token, forKey: Constants.keyText)
+            self.movieListViewStates = .initial
         }
     }
 
     private func keychainAlertView() {
-        //   movieListViewModel?.keychainInfo()?.setValue("", forKey: Constants.keyText)
         guard movieListViewModel?.keychainInfo()?.getValue(Constants.keyText) == Constants.emptyString else { return }
         keyChainAlert()
-        movieListViewStates = .initial
     }
 
     @objc private func refreshAction() {

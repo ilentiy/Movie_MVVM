@@ -5,6 +5,16 @@ import CoreData
 
 /// Core Data сервис
 final class CoreDataService: CoreDataServiceProtocol {
+    // MARK: - Private Enum
+
+    private enum Constants {
+        static let movieDataEntity = "MovieData"
+        static let movieDetailDataEntity = "MovieDetailData"
+        static let genresDataEntity = "GenreData"
+        static let categoryPredicate = "category = %@"
+        static let idPredicate = "id == %i"
+    }
+
     // MARK: - Private Properties
 
     private let modelName: String
@@ -29,7 +39,7 @@ final class CoreDataService: CoreDataServiceProtocol {
     // MARK: - Public Methods
 
     func saveMoviesData(movies: [Movie], category: String) {
-        guard let newMovie = NSEntityDescription.entity(forEntityName: "MovieData", in: managedContext)
+        guard let newMovie = NSEntityDescription.entity(forEntityName: Constants.movieDataEntity, in: managedContext)
         else { return }
         for movie in movies {
             let movieObject = MovieData(entity: newMovie, insertInto: managedContext)
@@ -54,7 +64,7 @@ final class CoreDataService: CoreDataServiceProtocol {
         var movieObjects: [MovieData] = []
         var movies: [Movie] = []
         let fetchRequest: NSFetchRequest<MovieData> = MovieData.fetchRequest()
-        let predicate = NSPredicate(format: "category = %@", category)
+        let predicate = NSPredicate(format: Constants.categoryPredicate, category)
         fetchRequest.predicate = predicate
         do {
             movieObjects = try managedContext.fetch(fetchRequest)
@@ -78,8 +88,11 @@ final class CoreDataService: CoreDataServiceProtocol {
 
     func saveMovieDetail(movie: MovieDetail) {
         guard
-            let movieEntity = NSEntityDescription.entity(forEntityName: "MovieDetailData", in: managedContext),
-            let genresEntity = NSEntityDescription.entity(forEntityName: "GenreData", in: managedContext)
+            let movieEntity = NSEntityDescription.entity(
+                forEntityName: Constants.movieDetailDataEntity,
+                in: managedContext
+            ),
+            let genresEntity = NSEntityDescription.entity(forEntityName: Constants.genresDataEntity, in: managedContext)
         else { return }
         let movieObject = MovieDetailData(entity: movieEntity, insertInto: managedContext)
         movieObject.backdropPath = movie.backdropPath
@@ -115,7 +128,7 @@ final class CoreDataService: CoreDataServiceProtocol {
         var movieDetail: MovieDetail
         var genres: [Genre] = []
         let fetchRequest: NSFetchRequest<MovieDetailData> = MovieDetailData.fetchRequest()
-        let predicate = NSPredicate(format: "id == %i", Int64(movieId))
+        let predicate = NSPredicate(format: Constants.idPredicate, Int64(movieId))
         fetchRequest.predicate = predicate
         do {
             guard let movieObject = try? managedContext.fetch(fetchRequest).first else { return }
