@@ -5,7 +5,7 @@ import Foundation
 
 /// Протокол вьюмодели  экрана  списка фильмов
 protocol MovieListViewModelProtocol {
-    var movies: [Movie]? { get set }
+    var movies: [Movie]? { get }
     var movieListViewStates: ((MovieListViewStates) -> ())? { get set }
 
     func fetchMovieList()

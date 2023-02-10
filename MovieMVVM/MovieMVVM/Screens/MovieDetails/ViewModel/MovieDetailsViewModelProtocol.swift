@@ -5,9 +5,9 @@ import Foundation
 
 /// Протокол вью модели экрана "Подробнее о фильме"
 protocol MovieDetailsViewModelProtocol {
-    var movieId: Int? { get set }
+    var movieId: Int? { get }
     var updateView: VoidHandler? { get set }
-    var movieDetails: MovieDetail? { get set }
+    var movieDetails: MovieDetail? { get }
     var showErrorAlert: ErrorHandler? { get set }
 
     func loadData()

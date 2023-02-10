@@ -1,9 +1,7 @@
 // MoviesListViewModel.swift
 // Copyright © Ilentiy. All rights reserved.
 
-// import CoreData
 import Foundation
-// import UIKit
 
 /// Вью модель экрана списка фильмов
 final class MoviesListViewModel: MovieListViewModelProtocol {

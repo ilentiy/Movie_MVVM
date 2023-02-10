@@ -3,7 +3,7 @@
 
 import CoreData
 
-/// Core Data сервис
+/// Сервис по сохранению данных в CoreData
 final class CoreDataService: CoreDataServiceProtocol {
     // MARK: - Private Enum
 
@@ -51,7 +51,6 @@ final class CoreDataService: CoreDataServiceProtocol {
             movieObject.movieId = Int64(movie.movieId)
             movieObject.category = category
             movieObject.id = UUID()
-
             do {
                 try managedContext.save()
             } catch let error as NSError {

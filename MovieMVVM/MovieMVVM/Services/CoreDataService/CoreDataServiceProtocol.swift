@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Протокол core data сервиса
+/// Протокол сервиса по сохранению данных в Core Data
 protocol CoreDataServiceProtocol {
     func saveMoviesData(movies: [Movie], category: String)
     func getMoviesData(category: String, completion: @escaping (Result<[Movie], Error>) -> Void)
