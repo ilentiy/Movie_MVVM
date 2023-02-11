@@ -1,13 +1,15 @@
 // Constants.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import Foundation
 
 /// Базовые ссылки
-enum BaseURL {
-    static let movies = "https://api.themoviedb.org/3/movie/"
-    static let image = "https://image.tmdb.org/t/p/w500"
-    static let apiKey = "?api_key=5e95e9b030369d612dfb2d6ecdfb4cf2&language=ru-RU"
+enum UrlRequest {
+    static let baseURL = "https://api.themoviedb.org/3/movie/"
+    static let baseImageURL = "https://image.tmdb.org/t/p/w500"
+    static let apiKey = "api_key"
+    static let languageKey = "language"
+    static let languageValue = "ru-RU"
 }
 
 /// Identifiers
@@ -37,12 +39,13 @@ enum AlertConstants {
     static let errorTitle = "Ошибка"
     static let errorMessageText = "Ошибка парсинга"
     static let actionTitle = "Ok"
-    static let emptyString = ""
+    static let tokenTitle = "Запрос токена"
+    static let tokenMessage = "Введите токен"
 }
 
 /// Констатнты
 enum Constants {
-    static let keyText = "isLogin"
+    static let keyText = "token"
     static let login = "admin"
     static let password = "admin"
     static let passwordText = "Пароль"
@@ -60,9 +63,11 @@ enum Constants {
     static let newLine = "\n"
     static let voteFormat = "%.1f"
     static let divider = 60
+    static let dataModel = "DataModel"
 }
 
 /// Псевдоним Типа
-typealias VoidHandler = () -> ()
-typealias ErrorHandler = (Error) -> ()
-typealias IntHandler = (Int) -> ()
+typealias VoidHandler = () -> Void
+typealias ErrorHandler = (Error) -> Void
+typealias IntHandler = (Int) -> Void
+typealias Closure = ((String) -> Void)?

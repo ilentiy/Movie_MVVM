@@ -1,16 +1,30 @@
 // NetworkService.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import Foundation
 
 /// Сетевой слой
 final class NetworkService: NetworkServiceProtocol {
+    // MARK: - Private Properties
+
+    private var keychainService: KeyChainServiceProtocol?
+
+    // MARK: - Init
+
+    init(keychainService: KeyChainServiceProtocol) {
+        self.keychainService = keychainService
+    }
+
     // MARK: - Public Methods
 
     func fetchMovieDetails(id: Int, completion: @escaping (Result<MovieDetail, Error>) -> Void) {
-        guard
-            let url = URL(string: "\(BaseURL.movies)\(id)\(BaseURL.apiKey)")
-        else { return }
+        guard var urlComponents = URLComponents(string: "\(UrlRequest.baseURL)\(id)") else { return }
+        urlComponents.queryItems = [
+            URLQueryItem(name: UrlRequest.apiKey, value: keychainService?.getValue(Constants.keyText)),
+            URLQueryItem(name: UrlRequest.languageKey, value: UrlRequest.languageValue)
+        ]
+        guard let url = urlComponents.url else { return }
+
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(error))
@@ -28,9 +42,12 @@ final class NetworkService: NetworkServiceProtocol {
     }
 
     func fetchMovies(category: Category, completion: @escaping (Result<[Movie], Error>) -> Void) {
-        guard
-            let url = URL(string: "\(BaseURL.movies)\(category.categoryString)\(BaseURL.apiKey)")
-        else { return }
+        guard var urlComponents = URLComponents(string: "\(UrlRequest.baseURL)\(category.category)") else { return }
+        urlComponents.queryItems = [
+            URLQueryItem(name: UrlRequest.apiKey, value: keychainService?.getValue(Constants.keyText)),
+            URLQueryItem(name: UrlRequest.languageKey, value: UrlRequest.languageValue)
+        ]
+        guard let url = urlComponents.url else { return }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(error))

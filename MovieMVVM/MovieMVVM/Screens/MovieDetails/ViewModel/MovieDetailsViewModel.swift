@@ -1,5 +1,5 @@
 // MovieDetailsViewModel.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import Foundation
 
@@ -14,6 +14,7 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
 
     // MARK: - Private Properties
 
+    private var coreDataService: CoreDataServiceProtocol?
     private var networkService: NetworkServiceProtocol?
     private var imageService: ImageServiceProtocol?
 
@@ -22,25 +23,43 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
     init(
         networkService: NetworkServiceProtocol,
         imageService: ImageServiceProtocol,
+        coreDataService: CoreDataServiceProtocol,
         movieId: Int?
     ) {
         self.networkService = networkService
-        self.movieId = movieId
         self.imageService = imageService
+        self.coreDataService = coreDataService
+        self.movieId = movieId
     }
 
     // MARK: - Public methods
 
     func loadData() {
-        fetchMovieDetails()
+        coreDataService?.getMovieDetailData(movieId: movieId ?? 0) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case let .success(movieDetails):
+                self.movieDetails = movieDetails
+                self.updateView?()
+            case let .failure(error):
+                self.showErrorAlert?(error)
+            }
+        }
+        guard
+            let movieDetails = movieDetails
+        else {
+            fetchMovieDetails()
+            return
+        }
     }
 
     func loadImageData(url: String, completion: @escaping (Result<Data, Error>) -> Void) {
         imageService?.getImage(url: url) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case let .success(data):
                 completion(.success(data))
-                self?.updateView?()
+                self.updateView?()
             case let .failure(error):
                 completion(.failure(error))
             }
@@ -56,6 +75,7 @@ final class MovieDetailsViewModel: MovieDetailsViewModelProtocol {
             switch result {
             case let .success(movieDetails):
                 self.movieDetails = movieDetails
+                self.coreDataService?.saveMovieDetail(movie: movieDetails)
                 self.updateView?()
             case let .failure(error):
                 self.showErrorAlert?(error)

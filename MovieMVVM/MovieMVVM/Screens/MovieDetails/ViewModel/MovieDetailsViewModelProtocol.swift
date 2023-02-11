@@ -1,18 +1,14 @@
 // MovieDetailsViewModelProtocol.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import Foundation
 
 /// Протокол вью модели экрана "Подробнее о фильме"
 protocol MovieDetailsViewModelProtocol {
-    // MARK: - Public Properties
-
-    var movieDetails: MovieDetail? { get set }
-    var movieId: Int? { get set }
+    var movieId: Int? { get }
     var updateView: VoidHandler? { get set }
+    var movieDetails: MovieDetail? { get }
     var showErrorAlert: ErrorHandler? { get set }
-
-    // MARK: - Public Methods
 
     func loadData()
     func loadImageData(url: String, completion: @escaping (Result<Data, Error>) -> Void)

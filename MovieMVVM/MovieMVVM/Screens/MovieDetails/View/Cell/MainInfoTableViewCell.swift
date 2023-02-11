@@ -1,5 +1,5 @@
 // MainInfoTableViewCell.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import UIKit
 
@@ -88,7 +88,6 @@ final class MainInfoTableViewCell: UITableViewCell {
 
     func configure(movieDetailsViewModel: MovieDetailsViewModelProtocol) {
         guard let movieDetails = movieDetailsViewModel.movieDetails else { return }
-
         var genresSring = Constants.emptyString
 
         for genre in movieDetails.genres {
@@ -96,8 +95,8 @@ final class MainInfoTableViewCell: UITableViewCell {
         }
         runtimeLabel.text = String(
             format: Constants.runtimeFormat,
-            movieDetails.runtime / Constants.divider,
-            movieDetails.runtime % Constants.divider
+            Int(movieDetails.runtime) / Constants.divider,
+            Int(movieDetails.runtime) % Constants.divider
         )
 
         titleLabel.attributedText = NSMutableAttributedString().bold("\(movieDetails.title)")
@@ -106,7 +105,7 @@ final class MainInfoTableViewCell: UITableViewCell {
             NSMutableAttributedString()
                 .normal("\(movieDetails.originalTitle) ")
                 .normalGray(
-                    "(\(movieDetails.releaseDate.components(separatedBy: Constants.minusSeparator).first ?? Constants.emptyString))"
+                    "(\(movieDetails.releaseDate.components(separatedBy: Constants.minusSeparator).first ?? ""))"
                 )
         genresLabel.text = genresSring
         taglineLabel.text = movieDetails.tagline

@@ -1,5 +1,5 @@
 // MoviesCategory.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import Foundation
 
@@ -9,7 +9,7 @@ enum Category {
     case popular
     case upcoming
 
-    var categoryString: String {
+    var category: String {
         switch self {
         case .popular:
             return "popular"

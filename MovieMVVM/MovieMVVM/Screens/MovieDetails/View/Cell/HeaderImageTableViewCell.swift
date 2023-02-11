@@ -1,5 +1,5 @@
 // HeaderImageTableViewCell.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Ilentiy. All rights reserved.
 
 import UIKit
 
@@ -36,7 +36,7 @@ class HeaderImageTableViewCell: UITableViewCell {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        fatalError(Constants.fatalError)
     }
 
     // MARK: - Public Methods
@@ -87,7 +87,7 @@ class HeaderImageTableViewCell: UITableViewCell {
             backdropImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
             backdropImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             backdropImageView.widthAnchor.constraint(equalTo: widthAnchor),
-            backdropImageView.heightAnchor.constraint(equalTo: backdropImageView.widthAnchor, multiplier: 0.56),
+            backdropImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 0.56)
         ])
     }
 
