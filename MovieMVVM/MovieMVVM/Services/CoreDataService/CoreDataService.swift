@@ -39,7 +39,10 @@ final class CoreDataService: CoreDataServiceProtocol {
     // MARK: - Public Methods
 
     func saveMoviesData(movies: [Movie], category: String) {
-        guard let newMovie = NSEntityDescription.entity(forEntityName: Constants.movieDataEntity, in: managedContext)
+        guard let newMovie = NSEntityDescription.entity(
+            forEntityName: Constants.movieDataEntity,
+            in: managedContext
+        )
         else { return }
         for movie in movies {
             let movieObject = MovieData(entity: newMovie, insertInto: managedContext)
@@ -91,7 +94,10 @@ final class CoreDataService: CoreDataServiceProtocol {
                 forEntityName: Constants.movieDetailDataEntity,
                 in: managedContext
             ),
-            let genresEntity = NSEntityDescription.entity(forEntityName: Constants.genresDataEntity, in: managedContext)
+            let genresEntity = NSEntityDescription.entity(
+                forEntityName: Constants.genresDataEntity,
+                in: managedContext
+            )
         else { return }
         let movieObject = MovieDetailData(entity: movieEntity, insertInto: managedContext)
         movieObject.backdropPath = movie.backdropPath
@@ -130,8 +136,10 @@ final class CoreDataService: CoreDataServiceProtocol {
         let predicate = NSPredicate(format: Constants.idPredicate, Int64(movieId))
         fetchRequest.predicate = predicate
         do {
-            guard let movieObject = try? managedContext.fetch(fetchRequest).first else { return }
-            guard let genresData = movieObject.genres?.allObjects as? [GenreData] else { return }
+            guard
+                let movieObject = try? managedContext.fetch(fetchRequest).first,
+                let genresData = movieObject.genres?.allObjects as? [GenreData]
+            else { return }
             for genreData in genresData {
                 let genre = Genre(name: genreData.name ?? "")
                 genres.append(genre)

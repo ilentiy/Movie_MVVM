@@ -6,4 +6,4 @@ import Foundation
 
 /// Подробная информация о фильме
 @objc(MovieDetailData)
-public class MovieDetailData: NSManagedObject {}
+final class MovieDetailData: NSManagedObject {}

@@ -5,7 +5,7 @@ import CoreData
 import Foundation
 
 /// расширение для жанра
-public extension GenreData {
+extension GenreData {
     @nonobjc class func fetchRequest() -> NSFetchRequest<GenreData> {
         NSFetchRequest<GenreData>(entityName: "GenreData")
     }

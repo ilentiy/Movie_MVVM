@@ -5,7 +5,7 @@ import CoreData
 import Foundation
 
 /// Расширение для Фильма
-public extension MovieData: Identifiable {
+extension MovieData: Identifiable {
     @nonobjc class func fetchRequest() -> NSFetchRequest<MovieData> {
         NSFetchRequest<MovieData>(entityName: "MovieData")
     }

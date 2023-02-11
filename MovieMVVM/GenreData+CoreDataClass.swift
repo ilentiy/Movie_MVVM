@@ -6,4 +6,4 @@ import Foundation
 
 /// Жанры
 @objc(GenreData)
-public class GenreData: MovieDetailData {}
+final class GenreData: MovieDetailData {}

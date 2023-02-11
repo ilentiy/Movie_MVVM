@@ -49,7 +49,7 @@ public extension MovieDetailData {
 }
 
 /// Generated accessors for genres
-public extension MovieDetailData {
+extension MovieDetailData {
     @objc(addGenresObject:)
     @NSManaged func addToGenres(_ value: GenreData)
 
