@@ -7,7 +7,6 @@ target 'MovieMVVM' do
 
   pod 'KeychainSwift'
 
-
   # Pods for MovieMVVM
 
 end
