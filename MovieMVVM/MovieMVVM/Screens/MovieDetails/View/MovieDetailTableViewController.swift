@@ -1,4 +1,4 @@
-// MovieDetailsTableViewController.swift
+// MovieDetailTableViewController.swift
 // Copyright © Ilentiy. All rights reserved.
 
 import UIKit

@@ -183,7 +183,6 @@ final class MoviesListTableViewController: UITableViewController {
     }
 
     private func keychainAlertView() {
-        movieListViewModel?.keychainInfo()?.setValue("", forKey: Constants.keyText)
         guard movieListViewModel?.keychainInfo()?.getValue(Constants.keyText) == Constants.emptyString else { return }
         keyChainAlert()
     }
